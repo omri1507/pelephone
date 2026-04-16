@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 *)",
+      "Bash(claude mcp *)",
+      "Bash(claude plugin *)",
+      "Bash(brew install *)",
+      "Bash(pdftoppm --version)",
+      "Bash(pdftoppm -r 150 /Applications/XAMPP/xamppfiles/htdocs/pelephone/web.pdf /tmp/pelephone_pdf)",
+      "Read(//private/tmp/**)",
+      "Bash(sips -s format png /tmp/pelephone_pdf-1.ppm --out /tmp/pelephone_pdf-1.png)",
+      "Bash(sips -s format png /tmp/pelephone_pdf-2.ppm --out /tmp/pelephone_pdf-2.png)",
+      "Bash(pdftoppm -r 220 /Applications/XAMPP/xamppfiles/htdocs/pelephone/web.pdf /tmp/pel2)",
+      "Bash(sips -s format png /tmp/pel2-1.ppm --out /tmp/pel2-1.png)",
+      "Bash(sips -s format png /tmp/pel2-2.ppm --out /tmp/pel2-2.png)"
+    ]
+  }
+}
