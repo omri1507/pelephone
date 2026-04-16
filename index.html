@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ועד עובדי פלאפון</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -94,6 +95,8 @@
       text-align: center;
       padding: 13px 20px;
       margin-bottom: 40px;
+      position: relative;
+      z-index: 5;
     }
     .nav-bar a {
       color: #fff;
@@ -104,8 +107,14 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: color 0.25s ease, transform 0.25s ease, letter-spacing 0.25s ease;
     }
-    .nav-bar a:hover { text-decoration: none; }
+    .nav-bar a:hover {
+      color: #001191;
+      transform: scale(1.04);
+      letter-spacing: 0.06em;
+      text-decoration: none;
+    }
     .nav-chevron {
       display: inline-block;
       animation: chevron-bounce 1s ease-in-out infinite;
@@ -399,7 +408,7 @@
     ══════════════════════════════════════════════════════════════ */
     .articles-section {
       background: #fff;
-      width: fit-content;
+      width: 100%;
       max-width: 1000px;
       margin: 0 auto;
       padding: 0 40px;
@@ -507,11 +516,128 @@
     /* ══════════════════════════════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════════════════════════════ */
-    @media (max-width: 520px) {
-      .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 12px; }
+
+    /* ── Tablet (≤ 768px) ── */
+    @media (max-width: 768px) {
+
+      /* Header */
+      .pelephone-header { height: 420px; }
+      .header-logo { height: 56px; top: 18px; right: 18px; }
+      .header-title { width: 70%; right: 4%; top: 54%; }
+      .trees-panel { left: -22%; height: 100%; }
+
+      /* Nav */
+      .nav-bar { padding: 14px 16px; margin-bottom: 28px; }
+      .nav-bar a { font-size: 26px; }
+
+      /* Benefits */
+      .benefits-section { padding: 36px 16px 48px; }
+      .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        max-width: 600px;
+      }
+      .benefit-card { height: 170px; }
+      .benefit-name { font-size: 22px; }
+      .benefit-value { font-size: 18px; }
+
+      /* Articles */
+      .articles-section { width: 100%; padding: 0 20px; }
+      .article-block { padding: 36px 0; }
+      .article-headline { font-size: clamp(22px, 4.5vw, 32px); }
+      .article-body { font-size: 16px; }
+
+      /* Social */
+      .social-footer { margin-top: 32px; padding: 24px 16px; }
+      .sicon { width: 54px; height: 54px; }
     }
-    @media (max-width: 340px) {
-      .benefits-grid { grid-template-columns: 1fr 1fr; }
+
+    /* ── Mobile (≤ 480px) ── */
+    @media (max-width: 480px) {
+
+      /* Header — switch to stacked flex layout */
+      .pelephone-header { height: auto; overflow: visible; }
+      .header-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 24px 16px 0;
+        overflow: hidden;
+      }
+      .header-logo {
+        position: relative;
+        top: auto; right: auto;
+        height: 64px;
+        margin-bottom: 20px;
+      }
+      .header-title {
+        position: relative;
+        top: auto; right: auto;
+        transform: none;
+        width: 88%;
+        max-width: 360px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: center;
+      }
+      .header-title img { content: url('img/mob-title.svg'); }
+      .trees-panel {
+        position: relative;
+        left: 1%;
+        bottom: 11%;
+        width: 131%;
+        height: 114%;
+        max-width: 110%;
+        margin-bottom: -10px;
+        margin-top: -60px;
+      }
+      .trees-panel svg { width: 100%; height: auto; }
+
+      /* Nav */
+      .nav-bar a { font-size: 20px; }
+      @keyframes chevron-bounce {
+        0%, 100% { transform: translateX(0); }
+        50%       { transform: translateX(-6px); }
+      }
+
+      /* Benefits */
+      .benefits-section { padding: 28px 12px 36px; }
+      .benefits-grid { gap: 10px; }
+      .benefit-card { height: 150px; border-radius: 12px; }
+      .benefit-name { font-size: 18px; }
+      .benefit-value { font-size: 15px; }
+
+      /* Video controls — bigger touch targets */
+      .video-controls { padding: 8px 12px 10px; gap: 8px; }
+      .vc-btn { width: 40px; height: 40px; }
+      .vc-progress::-webkit-slider-thumb { width: 16px; height: 16px; margin-top: -6px; }
+      .vc-progress::-moz-range-thumb { width: 16px; height: 16px; }
+      /* Always show controls on mobile (no hover) */
+      .video-wrap.playing .video-controls { opacity: 1; }
+
+      /* Articles */
+      .articles-section { padding: 0 14px; }
+      .article-block { padding: 28px 0; }
+      .article-header { gap: 10px; margin-bottom: 16px; }
+      .article-logo { height: 32px; }
+      .article-headline { font-size: clamp(20px, 5.5vw, 28px); }
+      .article-body { font-size: 15px; line-height: 1.75; margin-bottom: 20px; }
+      .btn-primary { font-size: 14px; padding: 10px 22px; }
+
+      /* Social */
+      .social-footer { margin-top: 24px; }
+      .sicon { width: 48px; height: 48px; }
+      .social-icons { gap: 12px; }
+    }
+
+    /* ── Very small (≤ 360px) ── */
+    @media (max-width: 360px) {
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefit-card { height: 130px; }
+      .benefit-name { font-size: 16px; }
+      .benefit-value { font-size: 14px; }
+      .nav-bar a { font-size: 17px; }
     }
   </style>
 </head>
@@ -588,63 +714,63 @@
      3. BENEFITS
 ══════════════════════════════════════════════════════════════ -->
 <section class="benefits-section">
-  <img class="benefits-title" src="img/grid-title.svg" alt="הישגי ההסכם הקיבוצי חברת פלאפון">
+  <img class="benefits-title" src="img/grid-title.svg" alt="הישגי ההסכם הקיבוצי חברת פלאפון" data-aos="fade-up" data-aos-duration="700">
 
   <div class="benefits-grid">
 
     <!-- שורה 1: ימין לשמאל -->
     <!-- 1 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="0">
       <div class="benefit-name">עבודה מהבית</div>
       <div class="benefit-value">שני וחמישי</div>
     </div>
 
     <!-- 2 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="75">
       <div class="benefit-name">קיצור שבוע העבודה</div>
       <div class="benefit-value">ל-8 שעות</div>
     </div>
 
     <!-- 3 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="150">
       <div class="benefit-name">תוספות שכר</div>
       <div class="benefit-value">9% קבוע! + 1.5</div>
     </div>
 
     <!-- שורה 2: ימין לשמאל -->
     <!-- 4 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="0">
       <div class="benefit-name">פנסיה מוקדמת</div>
       <div class="benefit-value">תקדימית</div>
     </div>
 
     <!-- 5 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="75">
       <div class="benefit-name">פרישה מרצון</div>
       <div class="benefit-value">אין פיטורים</div>
     </div>
 
     <!-- 6 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="150">
       <div class="benefit-name">מענק חתימה</div>
       <div class="benefit-value">עד 30 אלף</div>
     </div>
 
     <!-- שורה 3: ימין לשמאל -->
     <!-- 7 -->
-    <div class="benefit-card benefit-card--zanzibar">
+    <div class="benefit-card benefit-card--zanzibar" data-aos="fade-up" data-aos-delay="0">
       <div class="benefit-name">נופש חברה</div>
       <div class="benefit-value">זנזיבר!</div>
     </div>
 
     <!-- 8 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="75">
       <div class="benefit-name">הגדלת דמי הבראה</div>
       <div class="benefit-value">600 ש"ח</div>
     </div>
 
     <!-- 9 -->
-    <div class="benefit-card">
+    <div class="benefit-card" data-aos="fade-up" data-aos-delay="150">
       <div class="benefit-name">תוספות שכר</div>
       <div class="benefit-value">9% קבוע! + 1.5</div>
     </div>
@@ -655,7 +781,7 @@
 <!-- ══════════════════════════════════════════════════════════════
      4. VIDEO
 ══════════════════════════════════════════════════════════════ -->
-<div class="video-section">
+<div class="video-section" data-aos="fade-in" data-aos-duration="900">
   <div class="video-wrap" id="video-wrap">
     <img class="video-poster" src="img/poster.png" alt="סרטון ועד עובדי פלאפון">
     <video id="main-video" src="img/video.mp4" poster="img/poster.png" preload="none" playsinline></video>
@@ -683,7 +809,7 @@
 <div class="articles-section">
 
   <!-- Article 1 — כלכליסט -->
-  <div class="article-block">
+  <div class="article-block" data-aos="fade-up" data-aos-duration="700">
     <div class="article-header">
       <img class="article-logo" src="img/calcalist.png" alt="כלכליסט">
       <h2 class="article-headline">
@@ -696,7 +822,7 @@
   </div>
 
   <!-- Article 2 -->
-  <div class="article-block">
+  <div class="article-block" data-aos="fade-up" data-aos-duration="700" data-aos-delay="150">
     <div class="article-header">
       <h2 class="article-headline">
         ועד עובדי פלאפון:&nbsp;<mark>מודל חדש לעבודה מאורגנת בישראל</mark>
@@ -718,24 +844,24 @@
 ══════════════════════════════════════════════════════════════ -->
 <footer class="social-footer">
   <div class="social-icons">
-    <a href="#" class="sicon" aria-label="Facebook">
+    <a href="#" class="sicon" aria-label="Facebook" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="0">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
       </svg>
     </a>
-    <a href="#" class="sicon" aria-label="X">
+    <a href="#" class="sicon" aria-label="X" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="75">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
       </svg>
     </a>
-    <a href="#" class="sicon" aria-label="Instagram">
+    <a href="#" class="sicon" aria-label="Instagram" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="150">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5"/>
         <circle cx="12" cy="12" r="4"/>
         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
       </svg>
     </a>
-    <a href="#" class="sicon" aria-label="YouTube">
+    <a href="#" class="sicon" aria-label="YouTube" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="225">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
         <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
@@ -743,6 +869,17 @@
     </a>
   </div>
 </footer>
+
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 60,
+  });
+</script>
 
 <!-- Vanilla Tilt -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"
